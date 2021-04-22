@@ -1,0 +1,19 @@
+.sticky{
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.sticky.active{
+  background: linear-gradient(90deg,rbg(66,2,194) 0%, rbg(0,78,194) 100%)
+}
+
+.rs-nav-item > .rs-nav-item-content{
+  font-size: inherit;
+  font-family: fangsong;
+  font-weight: bolder;
+}
