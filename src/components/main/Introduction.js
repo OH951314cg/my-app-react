@@ -9,23 +9,27 @@ import brownSugar from "../../assets/images/brownSugar.jpg";
 import iceSugar from "../../assets/images/iceSugar.jpg";
 import yellowSugar from "../../assets/images/yellowSugar.jpg";
 import axios from "axios";
+import ProductDetail from "./ProductDetail";
 
 class Introduction extends Component {
   constructor() {
     super();
     this.state = {
       addressList: [],
+      showDetail: false,
+      currentClickId: "",
+      previouClickId: "",
     };
     this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this);
     this.onMouseLeaveHandler = this.onMouseLeaveHandler.bind(this);
+    this.productClickHandler = this.productClickHandler.bind(this);
   }
 
   componentDidMount() {
     this.httpCallExample();
   }
 
-
-  //#region mouse focus and lose focus 
+  //#region mouse focus and lose focus
   onMouseEnterHandler(id) {
     let elmt = document.getElementsByClassName("imageContainer");
     for (var i = 0, all = elmt.length; i < all; i++) {
@@ -65,6 +69,21 @@ class Introduction extends Component {
       });
   }
   //#endregion
+
+  productClickHandler(id) {
+    this.setState({ currentClickId: id });
+    if (this.state.previouClickId === id && this.state.showDetail === true) {
+      this.setState({
+        showDetail: false,
+      });
+    } else {
+      this.setState({
+        showDetail: true,
+      });
+    }
+
+    this.setState({ previouClickId: id });
+  }
 
   render() {
     return (
@@ -109,7 +128,12 @@ class Introduction extends Component {
                 >
                   <img src={whiteSugar} alt="White Sugar" className="image" />
                   <div className="imageText">
-                    <div className="text">[产品]</div>
+                    <div
+                      className="text"
+                      onClick={() => this.productClickHandler("whiteSugar")}
+                    >
+                      [产品]
+                    </div>
                   </div>
                 </div>
               </Col>
@@ -122,7 +146,12 @@ class Introduction extends Component {
                 >
                   <img src={brownSugar} alt="Brown Sugar" className="image" />
                   <div className="imageText">
-                    <div className="text">[产品]</div>
+                    <div
+                      className="text"
+                      onClick={() => this.productClickHandler("brownSugar")}
+                    >
+                      [产品]
+                    </div>
                   </div>
                 </div>
               </Col>
@@ -135,7 +164,12 @@ class Introduction extends Component {
                 >
                   <img src={iceSugar} alt="Ice Sugar" className="image" />
                   <div className="imageText">
-                    <div className="text">[产品]</div>
+                    <div
+                      className="text"
+                      onClick={() => this.productClickHandler("iceSugar")}
+                    >
+                      [产品]
+                    </div>
                   </div>
                 </div>
               </Col>
@@ -148,12 +182,20 @@ class Introduction extends Component {
                 >
                   <img src={yellowSugar} alt="Yellow Sugar" className="image" />
                   <div className="imageText">
-                    <div className="text">[产品]</div>
+                    <div
+                      className="text"
+                      onClick={() => this.productClickHandler("yellowSugar")}
+                    >
+                      [产品]
+                    </div>
                   </div>
                 </div>
               </Col>
             </Row>
           </Grid>
+          {this.state.showDetail && (
+            <ProductDetail id={this.state.currentClickId}></ProductDetail>
+          )}
         </section>
         <section id="address">
           <h2>我们的地址</h2>
